@@ -1,5 +1,9 @@
 [Sangria](http://sangria-graphql.org/) [jackson](https://github.com/FasterXML/jackson) marshalling.
 
+
+
+[![Build Status](https://travis-ci.org/wix-incubator/sangria-jackson.svg?branch=master)](https://travis-ci.org/wix-incubator/sangria-jackson)
+
 SBT Configuration:
 
 ```scala
