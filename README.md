@@ -4,11 +4,7 @@
 
 [![Build Status](https://travis-ci.org/wix-incubator/sangria-jackson.svg?branch=master)](https://travis-ci.org/wix-incubator/sangria-jackson)
 
-SBT Configuration:
-
-```scala
-libraryDependencies += "com.wix" %% "sangria-jackson" % "0.1.0"
-```
+Not yet released.
 
 ## Usage
 
