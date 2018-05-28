@@ -83,7 +83,7 @@ class BasicJacksonMarshallerForObjectMapper(objectMapper: ObjectMapper) {
   }
 
   implicit object JacksonInputUnmarshaller extends InputUnmarshaller[JsonNode] {
-    override def getRootMapValue(node: JsonNode, key: String) = Option(node.findValue(key))
+    override def getRootMapValue(node: JsonNode, key: String) = Option(node.get(key))
 
     override def isMapNode(node: JsonNode) = node.isObject
 
