@@ -20,7 +20,6 @@ package com.wix.sangria.marshalling.jackson
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node._
 import org.scalatest.{Matchers, WordSpec}
-import sangria.marshalling.FromInput
 import sangria.marshalling.testkit._
 
 object Inputs {
@@ -81,6 +80,16 @@ class JacksonSupportSpec extends WordSpec with Matchers with MarshallingBehaviou
       rendered should be (compactJson)
     }
   }
+  
+  "Enum handling" should {
+    import com.wix.sangria.marshalling.jackson.JacksonConfiguration.marshalling 
+    
+    "render toInput to a textNode" in {
+      val (node, unmarshaller) = marshalling.jacksonToInput[AnEnum.Value].toInput(AnEnum.B)
+      node should be (new TextNode("B"))
+      unmarshaller.isEnumNode(node) should be (true)
+    }
+  }
 
   "JacksonResultMarshaller" should {
     "render pretty" in {
@@ -95,4 +104,8 @@ class JacksonSupportSpec extends WordSpec with Matchers with MarshallingBehaviou
       rendered should be (compactJson)
     }
   }
+}
+
+object AnEnum extends Enumeration {
+  val A, B, C = Value
 }

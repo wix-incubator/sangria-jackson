@@ -17,7 +17,7 @@
 
 package com.wix.sangria.marshalling.jackson
 
-import com.fasterxml.jackson.databind.node.ObjectNode
+import com.fasterxml.jackson.databind.node.{ObjectNode, TextNode}
 import com.fasterxml.jackson.databind.{JsonMappingException, JsonNode, ObjectMapper}
 import sangria.marshalling._
 
@@ -130,7 +130,15 @@ class BasicJacksonMarshallerForObjectMapper(objectMapper: ObjectMapper) {
   }
 
   class JacksonToInput[T] extends ToInput[T, JsonNode] {
-    override def toInput(value: T): (JsonNode, InputUnmarshaller[JsonNode]) = (objectMapper.valueToTree(value), JacksonInputUnmarshaller)
+    override def toInput(value: T): (JsonNode, InputUnmarshaller[JsonNode]) = {
+      value match {
+        case enumValue: Enumeration#Value =>
+          (new TextNode(enumValue.toString), JacksonInputUnmarshaller)
+        case regularValue => 
+          (objectMapper.valueToTree(regularValue), JacksonInputUnmarshaller)
+      }
+      
+    }
   }
 
   private object JacksonJsonNodeToInput extends ToInput[JsonNode, JsonNode] {
