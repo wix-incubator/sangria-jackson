@@ -43,7 +43,7 @@
     </developers>
     
     <properties>
-        <jacksonVersion>2.9.5</jacksonVersion>
+        <jacksonVersion>2.12.7.1</jacksonVersion>
     </properties>
     
     <dependencies>
